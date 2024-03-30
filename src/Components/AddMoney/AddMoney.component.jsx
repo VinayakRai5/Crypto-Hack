@@ -10,9 +10,11 @@ const AddMoney = ({ setModal }) => {
 
     const addMoneyFunction = () => {
         addMoneyDB(user.uid, moneyRef.current.value).then((res) => {
-            if (res.status == "Success") {
+            if (res && res.status === "Success") {
                 setModal(false);
-            }
+            } else {
+                console.error("Failed to add money:", res.message); // Log error message if status indicates failure
+              }
         }).finally(() => {
             setRefresh((e) => !e)
         })

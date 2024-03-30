@@ -81,9 +81,10 @@ export async function CreateUserinDB(uid, firstName, lastName, email, phone) {
       lastName: lastName,
       email: email,
       phone: phone,
-      balance: 0, // Assuming initial balance is zero
+      balance: 0.0, // Assuming initial balance is zero
       crypto_holdings: {}, // Assuming initial holdings are empty
     };
+    userData.balance = Number(userData.balance);
     await setDoc(doc(db, 'users', uid), userData);
     console.log("Document successfully written!");
   } catch (error) {
@@ -97,50 +98,64 @@ export async function addMoneyDB(uid, amount) {
   try {
     const userRef = doc(db, 'users', uid);
     const userDoc = await getDoc(userRef);
+    
     if (userDoc.exists()) {
       const currentBalance = userDoc.data().balance || 0;
-      const newBalance = currentBalance + amount;
+      const parsedCurrentBalance = Number(currentBalance);
+      const newBalance = parsedCurrentBalance + Number(amount);
+
       await updateDoc(userRef, {
         balance: newBalance
       });
+
       console.log("Balance updated successfully!");
+      return { status: "Success" }; // Return success status
     } else {
       console.log('User document does not exist');
+      return { status: "Error", message: "User document does not exist" }; // Return error status
     }
   } catch (error) {
     console.error(error);
+    return { status: "Error", message: error.message }; // Return error status with message
   }
 }
+
 
 // Withdraw money from user's balance
 export async function WithdrawMoney(uid, amount) {
   try {
     const userRef = doc(db, 'users', uid);
-    await updateDoc(userRef, {
-      balance: FieldValue.increment(-amount)
-    });
+    const userDoc = await getDoc(userRef);
+    if (userDoc.exists()) {
+      const currentBalance = userDoc.data().balance || 0;
+      const parsedCurrentBalance = Number(currentBalance)
+      const newBalance = parsedCurrentBalance - Number(amount);
+      await updateDoc(userRef, {
+        balance: newBalance
+      });
     console.log("Balance updated successfully!");
+   } else{ console.log('User Document does not exist'); }
   } catch (error) {
     console.error(error);
   }
 }
 
 // Fetch user's balance
-export async function FetchBalance(uid) {
-  try {
-    const userRef = doc(db, 'users', uid);
-    const docSnap = await getDoc(userRef);
-    if (docSnap.exists()) {
-      return docSnap.data().balance;
-    } else {
-      console.log('No such document!');
-      return null;
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-}
+// export async function FetchBalance(uid) {
+//   try {
+//     const userRef = doc(db, 'users', uid);
+//     const docSnap = await getDoc(userRef);
+//     if (docSnap.exists()) {
+//       return docSnap.data().balance;
+//     } else {
+//       console.log('No such document!');
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     return null;
+//   }
+// }
 
 // Buy cryptocurrency and update user's holdings
 export async function BuyCryptoAPI(uid, token_id, amount) {
@@ -201,6 +216,21 @@ export async function FetchInitialBalance(uid) {
     return null;
   }
 }
+// export async function FetchBalance(uid) {
+  //   try {
+  //     const userRef = doc(db, 'users', uid);
+  //     const docSnap = await getDoc(userRef);
+  //     if (docSnap.exists()) {
+  //       return docSnap.data().balance;
+  //     } else {
+  //       console.log('No such document!');
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     return null;
+  //   }
+  // }
 
 // Fetch individual cryptocurrency holding
 export async function FetchIndividualCryptoHolding(uid, token_id) {
