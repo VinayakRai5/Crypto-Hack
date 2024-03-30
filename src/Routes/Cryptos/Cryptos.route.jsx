@@ -29,7 +29,7 @@ const CryptoRoute = () => {
                         <motion.div className="hidden flex-col gap-3 card p-5 lg:flex">
                             <motion.h2 className="text-2xl font-semibold" layout="position">Did you know?</motion.h2>
 
-                            <motion.span key={quote} initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 100 }} exit={{ y: -20, opacity: 0 }} className="text-sm text-gray-500">{quote}</motion.span>
+                            <motion.span key={quote} initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 100 }} exit={{ y: -20, opacity: 0 }} className="text-sm text-white-500">{quote}</motion.span>
 
                         </motion.div>
                     </AnimatePresence>

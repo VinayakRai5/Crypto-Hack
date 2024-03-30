@@ -6,7 +6,7 @@ const NavBar = () => {
     const { user } = useContext(UserContext);
     const location = useLocation();
 
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
 
     useEffect(() => {
         if (darkMode) {
