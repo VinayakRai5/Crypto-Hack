@@ -1,7 +1,6 @@
 # Nexus Crypto-Hack 💻💲
 Official Repo of the Nexus
 
-Nexus the Crypto Exchange Website Readme
 
 Welcome to our Crypto Exchange Website repository! Below you will find information on the features, setup, and usage of our platform.
 
