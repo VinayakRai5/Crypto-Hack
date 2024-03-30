@@ -92,7 +92,7 @@ const DashboardRoute = () => {
                             <span className="material-symbols-outlined bg-indigo-800 rounded-lg p-2 text-white">account_balance</span>
                             <div className="flex flex-col">
                                 <span className="text-sm">Current Balance:</span>
-                                <span className="blue font-semibold"><CurrencyText amoun={db_user?.balance} /></span>
+                                <span className="blue font-semibold"><CurrencyText amoun={db_user?.Current_Balance} /></span>
                             </div>
                         </div>
 

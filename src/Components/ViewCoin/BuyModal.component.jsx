@@ -14,9 +14,13 @@ const BuyModal = ({ coin, setBuyModal }) => {
     const BuyCryptoFn = () => {
         setBuying(true)
         BuyCryptoAPI(user.uid, coin.uuid, parseFloat(cryptoAmount)).then((res) => {
-            if (res.status == "Success") {
+            if (res && res.status && res.status === "Success") {
                 setBuyModal(false)
+            } else {
+                console.error("BuyCryptoAPI failed or returned invalid response:", res);
             }
+        }).catch((error) => {
+            console.error("BuyCryptoAPI failed with error:", error);
         }).finally(() => {
             setBuying(false)
             setRefresh((e) => !e)
