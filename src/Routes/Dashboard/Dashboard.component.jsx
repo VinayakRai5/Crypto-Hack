@@ -119,7 +119,9 @@ const DashboardRoute = () => {
                         <div className="flex flex-col gap-4 p-5 card">
                             <span className="text-lg flex w-full justify-between items-center">Current Holdings<span className="text-sm cursor-pointer">View all</span></span>
                             <div className="flex">
-                                <CryptoHoldings holdings={cryptoHoldings.slice(0, 6)} listOfCoins={listOfCoins} />
+                                {cryptoHoldings && cryptoHoldings.length > 0 && (
+                                    <CryptoHoldings holdings={cryptoHoldings.slice(0, 6)} listOfCoins={listOfCoins} />
+                                )}
                             </div>
                         </div>
 
@@ -127,7 +129,9 @@ const DashboardRoute = () => {
                             <div className="flex flex-col gap-4 p-4 px-6 card w-full">
                                 <span className="text-lg flex w-full justify-between items-center"><span>Fiat Transaction History</span><span className="text-sm cursor-pointer">View all</span></span>
                                 <div className="flex">
-                                    <FiatTransactionsDashboard transactions={fiatTransactions.slice(0, 8)} />
+                                    {fiatTransactions && fiatTransactions.length >0 &&(
+                                        <FiatTransactionsDashboard transactions={fiatTransactions.slice(0, 8)} />
+                                    )}   
                                 </div>
                             </div>
                         </div>
@@ -136,7 +140,9 @@ const DashboardRoute = () => {
                     <div className="flex flex-col gap-4 p-5 px-6 card flex-1">
                         <span className="text-lg flex w-full justify-between items-center"><span>Crypto Transaction History</span><span className="text-sm cursor-pointer">View all</span></span>
                         <div className="flex">
+                            {cryptoTransactions && cryptoTransactions.length>0 && (
                             <CryptoTransactionsDashboard transactions={cryptoTransactions.slice(0, 12)} />
+                            )} 
                         </div>
                     </div>
                 </div>
