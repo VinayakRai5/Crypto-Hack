@@ -270,7 +270,6 @@
     "update-browserslist-db": "^1.0.11",
     "uri-js": "^4.4.1",
     "util-deprecate": "^1.0.2",
-    "vite": "^4.5.3",
     "vite-plugin-commonjs": "^0.10.1",
     "webidl-conversions": "^3.0.1",
     "websocket-driver": "^0.7.4",
@@ -298,6 +297,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.11.30"
+    "@types/node": "^20.11.30",
+    "vite": "^5.2.7"
   }
 }
