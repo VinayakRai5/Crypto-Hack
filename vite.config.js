@@ -11,5 +11,9 @@ export default defineConfig({
       }
     },
   }),react()],
+  server: {
+    open: true,
+    origin: 'api-cryptohack.onrender.com'
+  },
 
 });
