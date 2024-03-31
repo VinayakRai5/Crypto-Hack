@@ -10,7 +10,6 @@ import axios from "axios"
 // const db = getFirestore(app);
 
 
-
 export async function FetchCoin(uid, timePeriod) {
   const options = {
     method: 'GET',
@@ -59,7 +58,7 @@ export async function FetchCoinPrice(uid, timePeriod) {
 export async function FetchDBData(uid, accessToken) {
   const options = {
     method: 'GET',
-    url: `http://127.0.0.1:8000/users/${uid}`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}`,
   };
 
   try {
@@ -74,7 +73,7 @@ export async function FetchDBData(uid, accessToken) {
 export async function CreateUserinDB(uid, First_Name, Last_Name, Email, Phone) {
   const options = {
     method: 'POST',
-    url: `http://127.0.0.1:8000/create_user`,
+    url: `https://api-cryptohack.onrender.com/create_user`,
     params: {
       uid,
       First_Name,
@@ -96,7 +95,7 @@ export async function CreateUserinDB(uid, First_Name, Last_Name, Email, Phone) {
 export async function addMoneyDB(uid, amount) {
   const options = {
     method: 'POST',
-    url: `http://127.0.0.1:8000/add_balance`,
+    url: `https://api-cryptohack.onrender.com/add_balance`,
     params: {
       uid,
       amount
@@ -115,7 +114,7 @@ export async function addMoneyDB(uid, amount) {
 export async function WithdrawMoney(uid, amount) {
   const options = {
     method: 'POST',
-    url: `http://127.0.0.1:8000/withdraw_money`,
+    url: `https://api-cryptohack.onrender.com/withdraw_money`,
     params: {
       uid,
       amount
@@ -134,7 +133,7 @@ export async function WithdrawMoney(uid, amount) {
 export async function FetchBalance(uid) {
   const options = {
     method: 'POST',
-    url: `http://127.0.0.1:8000/users/${uid}/fetch_balance`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}/fetch_balance`,
   };
 
   try {
@@ -149,7 +148,7 @@ export async function FetchBalance(uid) {
 export async function BuyCryptoAPI(uid, token_id, amount) {
   const options = {
     method: 'POST',
-    url: `http://127.0.0.1:8000/users/${uid}/buy_crypto`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}/buy_crypto`,
     params: {
       token_id,
       amount
@@ -168,7 +167,7 @@ export async function BuyCryptoAPI(uid, token_id, amount) {
 export async function SellCryptoAPI(uid, token_id, amount) {
   const options = {
     method: 'POST',
-    url: `http://127.0.0.1:8000/users/${uid}/sell_crypto`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}/sell_crypto`,
     params: {
       token_id,
       amount
@@ -188,7 +187,7 @@ export async function SellCryptoAPI(uid, token_id, amount) {
 export async function FetchCryptoHoldings(uid) {
   const options = {
     method: 'GET',
-    url: `http://127.0.0.1:8000/users/${uid}/crypto_holdings`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}/crypto_holdings`,
   };
 
   try {
@@ -203,7 +202,7 @@ export async function FetchCryptoHoldings(uid) {
 export async function FetchCryptoTransactions(uid) {
   const options = {
     method: 'GET',
-    url: `http://127.0.0.1:8000/users/${uid}/crypto_transactions`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}/crypto_transactions`,
   };
 
   try {
@@ -218,7 +217,7 @@ export async function FetchCryptoTransactions(uid) {
 export async function FetchFiatTransactions(uid) {
   const options = {
     method: 'GET',
-    url: `http://127.0.0.1:8000/users/${uid}/fiat_transactions`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}/fiat_transactions`,
   };
 
   try {
@@ -233,7 +232,7 @@ export async function FetchFiatTransactions(uid) {
 export async function FetchInitialBalance(uid) {
   const options = {
     method: 'GET',
-    url: `http://127.0.0.1:8000/users/${uid}/initial_portfolio_value`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}/initial_portfolio_value`,
   };
 
   try {
@@ -248,7 +247,7 @@ export async function FetchInitialBalance(uid) {
 export async function FetchIndividualCryptoHolding(uid, token_id) {
   const options = {
     method: 'GET',
-    url: `http://127.0.0.1:8000/users/${uid}/get_crypto_holding`,
+    url: `https://api-cryptohack.onrender.com/users/${uid}/get_crypto_holding`,
     params:{
       token_id
     }
