@@ -12,6 +12,7 @@
     "@vitejs/plugin-react-swc": "^3.6.0",
     "acorn": "^8.10.0",
     "acorn-jsx": "^5.3.2",
+    "active-time-on-page": "^1.0.3",
     "ajv": "^6.12.6",
     "ansi-regex": "^5.0.1",
     "ansi-styles": "^4.3.0",
