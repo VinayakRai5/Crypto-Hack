@@ -15,6 +15,8 @@ import ProfileRoute from './Routes/Profile/Profile.route.jsx';
 import DashboardRoute from './Routes/Dashboard/Dashboard.component.jsx';
 import { CreateDBUser } from './Routes/CreateDBUser/CreateDBUser.route.jsx';
 import AI_AssistantRoute from './Routes/AI_Assistant/AI_Assistant.route.jsx';
+import HomeRoute from './Routes/Home/Home.route.jsx';
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
             {
                 path: "AI_Assistant",
                 element: <AI_AssistantRoute />,
+            },
+            {
+                path: "Home",
+                element: <HomeRoute />,
             }
         ],
     },
