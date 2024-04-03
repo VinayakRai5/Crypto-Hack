@@ -14,7 +14,7 @@ import { UserProvider } from './Contexts/user.context.jsx';
 import ProfileRoute from './Routes/Profile/Profile.route.jsx';
 import DashboardRoute from './Routes/Dashboard/Dashboard.component.jsx';
 import { CreateDBUser } from './Routes/CreateDBUser/CreateDBUser.route.jsx';
-
+import AI_AssistantRoute from './Routes/AI_Assistant/AI_Assistant.route.jsx';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -44,6 +44,10 @@ const router = createBrowserRouter([
                 path: "CompleteRegisteration",
                 element: <CreateDBUser />,
             },
+            {
+                path: "AI_Assistant",
+                element: <AI_AssistantRoute />,
+            }
         ],
     },
 ]);
