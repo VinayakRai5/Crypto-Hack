@@ -72,7 +72,7 @@ const DashboardRoute = () => {
         let port = 0;
 
         cryptoHoldings.map((holding) => {
-            port += holding.amount * listOfCoins[holding.token_symbol]?.price
+            port += holding.quantity * listOfCoins[holding.token_symbol]?.price
         })
 
         setValue(port);

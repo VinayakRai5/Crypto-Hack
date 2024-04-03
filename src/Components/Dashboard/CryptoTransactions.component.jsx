@@ -23,8 +23,8 @@ const CryptoTransactionsDashboard = ({ transactions }) => {
                         </div>
 
                         <div className="flex flex-col items-end">
-                            <CurrencyText amoun={transaction.amount * transaction.token_price} />
-                            <div className="text-xs second-gray">{transaction.amount} Tokens</div>
+                            <CurrencyText amoun={transaction.quantity * transaction.token_price} />
+                            <div className="text-xs second-gray">{transaction.quantity} Tokens</div>
                         </div>
                     </div>
                 )
