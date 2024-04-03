@@ -36,6 +36,9 @@ const ChatWindow = () => {
       return;
     }
 
+    // Check if the scroll position is at the bottom before updating messages
+    const isScrolledToBottom = chatContainerRef.current.scrollHeight - chatContainerRef.current.clientHeight <= chatContainerRef.current.scrollTop + 1;
+
     // Update messages with the user message
     setMessages((prevMessages) => [
       ...prevMessages,
@@ -56,6 +59,11 @@ const ChatWindow = () => {
           timestamp: new Date(),
         },
       ]);
+
+      // If scrolled to bottom before the update, scroll to the bottom again after updating messages
+      if (isScrolledToBottom) {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      }
 
       setLoading(false);
     } catch (error) {
@@ -108,13 +116,13 @@ const ChatWindow = () => {
   };
 
   return (
-    <div className="chat-window h-screen flex flex-col bg-grey-900 text-white">
+    <div className="chat-window flex flex-col bg-grey-900 text-white">
       <Header />
-      <div className="chat-container flex-grow overflow-y-auto p-4" ref={chatContainerRef}>
+      <div className="chat-container flex-grow overflow-y-auto p-4" style={{ maxHeight: "calc(90vh - 200px)" }} ref={chatContainerRef}>
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`message ${message.sender === "User" ? "bg-gray-900 text-white" : "bg-grey-700 text-white"} flex flex-col items-start space-y-1 py-2 px-4 rounded-md`}
+            className={`message ${message.sender === "User" ? "bg-grey-900 text-white" : "bg-gray-600 text-white"} flex flex-col items-start space-y-1 py-2 px-4 rounded-md`}
           >
             <span className="font-bold">{message.sender}</span>
             {message.isImage ? (
