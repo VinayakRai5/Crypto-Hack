@@ -10,12 +10,12 @@ const InputBox = ({ sendMessage, loading, handleImageUpload, input, setInput }) 
   };
 
   return (
-    <div className="input-box">
-      {loading && <progress style={{ width: "100%" }} />}
+    <div className="fixed bottom-0 w-full bg-grey-900 p-4">
+      {loading && <progress className="w-full" />}
       <input
         disabled={loading}
         type="text"
-        className="form-control"
+        className="form-control bg-grey-900 text-white px-4 py-2 rounded-md w-full focus:outline-none"
         placeholder="Type a message..."
         value={loading ? "Loading..." : input}
         onChange={(e) => setInput(e.target.value)}
@@ -28,7 +28,7 @@ const InputBox = ({ sendMessage, loading, handleImageUpload, input, setInput }) 
         style={{ display: "none" }}
         id="file-input"
       />
-      <button onClick={() => document.getElementById("file-input").click()}>
+      <button className="bg-black text-white px-4 py-2 rounded-md" onClick={() => document.getElementById("file-input").click()}>
         Upload Image
       </button>
     </div>
@@ -36,4 +36,3 @@ const InputBox = ({ sendMessage, loading, handleImageUpload, input, setInput }) 
 };
 
 export default InputBox;
-

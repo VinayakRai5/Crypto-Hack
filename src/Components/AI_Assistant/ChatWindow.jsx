@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import MDEditor, { image } from "@uiw/react-md-editor";
 import InputBox from "./InputBox";
-import logo from "../../assets/images/assistant.png";
-import "../../assets/ChatWindow.css"; // For custom styles
 import { textOnly, multimodal, chat } from "../../Helpers/gemini";
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
@@ -12,12 +9,12 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 
 const Header = () => {
   return (
-    <div className="header">
-      <h1 id="chat-header">
-        <img src={logo} alt="gemini" width={120} />
-        <b style={{ marginLeft: 5 }}>Chatbot</b>
+    <div className="header bg-grey-900 text-white p-4">
+      <h1 id="chat-header" className="flex items-center">
+        <img src="logo1.jpeg" alt="chatbot" width={50} />
+        <b style={{ marginLeft: 5, fontSize: 35 }}>Financial Advisor</b>
       </h1>
-      <small>Our Helpful Assistant at your needs</small>
+      <small>Your Financial and Mental Health Supporter</small>
     </div>
   );
 };
@@ -42,7 +39,7 @@ const ChatWindow = () => {
     // Update messages with the user message
     setMessages((prevMessages) => [
       ...prevMessages,
-      { text: inputText, sender: "user", timestamp: new Date() },
+      { text: inputText, sender: "User", timestamp: new Date() },
     ]);
 
     setLoading(true);
@@ -82,7 +79,7 @@ const ChatWindow = () => {
         {
           imageUrl: imageUrl,
           text: input,
-          sender: "user",
+          sender: "User",
           timestamp: new Date(),
           isImage: true,
         },
@@ -111,33 +108,32 @@ const ChatWindow = () => {
   };
 
   return (
-    <div className={`chat-window`}>
+    <div className="chat-window h-screen flex flex-col bg-grey-900 text-white">
       <Header />
-      <div className="chat-container" ref={chatContainerRef}>
-      {messages.map((message, index) => (
-  <div
-    key={index}
-    className={`message ${message.sender === "user" ? "user" : "ai"}`}
-  >
-    {message.isImage ? (
-      <>
-        <img src={message.imageUrl} alt="Uploaded" />
-        {message.text && <p className="message-text">{message.text}</p>}
-      </>
-    ) : (
-      <>
-        <p className="message-text">{message.text}</p>
-        <span
-          className={`time ${message.sender === "user" ? "user" : "ai"}`}
-        >
-          {message.timestamp
-            ? dayjs(message.timestamp).format("DD.MM.YYYY HH:mm:ss")
-            : ""}
-        </span>
-      </>
-    )}
-  </div>
-))}
+      <div className="chat-container flex-grow overflow-y-auto p-4" ref={chatContainerRef}>
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`message ${message.sender === "User" ? "bg-gray-900 text-white" : "bg-grey-700 text-white"} flex flex-col items-start space-y-1 py-2 px-4 rounded-md`}
+          >
+            <span className="font-bold">{message.sender}</span>
+            {message.isImage ? (
+              <>
+                <img src={message.imageUrl} alt="Uploaded" className="max-w-xs rounded-lg" />
+                {message.text && <p className="message-text mt-2">{message.text}</p>}
+              </>
+            ) : (
+              <>
+                <p className="message-text mt-2">{message.text}</p>
+                <span className={`time text-sm`}>
+                  {message.timestamp
+                    ? dayjs(message.timestamp).format("DD.MM.YYYY HH:mm:ss")
+                    : ""}
+                </span>
+              </>
+            )}
+          </div>
+        ))}
       </div>
       <InputBox sendMessage={sendMessage} loading={loading} handleImageUpload={handleImageUpload} input={input} setInput={setInput} />
     </div>
