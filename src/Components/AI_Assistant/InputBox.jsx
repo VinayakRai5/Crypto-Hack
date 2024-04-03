@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-const InputBox = ({ sendMessage, loading }) => {
-  const [input, setInput] = useState("");
+const InputBox = ({ sendMessage, loading, handleImageUpload, input, setInput }) => {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && input.trim() !== "") {
@@ -20,8 +19,18 @@ const InputBox = ({ sendMessage, loading }) => {
         placeholder="Type a message..."
         value={loading ? "Loading..." : input}
         onChange={(e) => setInput(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyPress}
       />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => handleImageUpload(e, input)}
+        style={{ display: "none" }}
+        id="file-input"
+      />
+      <button onClick={() => document.getElementById("file-input").click()}>
+        Upload Image
+      </button>
     </div>
   );
 };
