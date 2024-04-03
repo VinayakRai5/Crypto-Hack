@@ -73,6 +73,13 @@ const ChatWindow = () => {
     const reader = new FileReader();
     reader.onload = async () => {
       const imageBinary = reader.result;
+    //   const blob = new Blob([imageBinary], { type: file.type });
+      const imageUrl = `data:${file.type};base64,${btoa(imageBinary)}`;
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: imageUrl, sender: "user", timestamp: new Date(), isImage : true,},
+      ]);
+      
       try {
         const text = await multimodal(imageBinary);
         setMessages((prevMessages) => [
@@ -101,8 +108,8 @@ const ChatWindow = () => {
               message.sender === "user" ? "user" : "ai"
             }`}
           >
-            {message.text.startsWith("User uploaded an image:") ? (
-              <img src={message.text.split(": ")[1]} alt="Uploaded" />
+            {message.isImage ? (
+              <img src={message.text} alt="Uploaded" />
             ) : (
               <>
                 <p className="message-text">{message.text}</p>
