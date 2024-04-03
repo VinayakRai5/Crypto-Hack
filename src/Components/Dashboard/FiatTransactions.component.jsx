@@ -17,7 +17,7 @@ const FiatTransactionsDashboard = ({ transactions }) => {
                             }}>{transaction.transaction_type}</div>
 
                             <div className="flex flex-col">
-                                <CurrencyText amoun={transaction.amount} />
+                                <CurrencyText amoun={transaction.quantity} />
                             </div>
                         </div>
 
