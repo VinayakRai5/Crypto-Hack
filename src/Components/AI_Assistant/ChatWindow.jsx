@@ -27,6 +27,7 @@ const ChatWindow = () => {
   const fileInputRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     // Auto-scroll to the bottom of the chat container when new messages are added
@@ -66,22 +67,31 @@ const ChatWindow = () => {
     }
   };
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload = (event, inputText) => {
     const file = event.target.files[0];
     if (!file) return;
-
+  
     const reader = new FileReader();
     reader.onload = async () => {
       const imageBinary = reader.result;
-    //   const blob = new Blob([imageBinary], { type: file.type });
       const imageUrl = `data:${file.type};base64,${btoa(imageBinary)}`;
+  
+      // Update messages with the user image
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: imageUrl, sender: "user", timestamp: new Date(), isImage : true,},
+        {
+          imageUrl: imageUrl,
+          text: input,
+          sender: "user",
+          timestamp: new Date(),
+          isImage: true,
+        },
       ]);
-      
+  
+      setLoading(true);
+  
       try {
-        const text = await multimodal(imageBinary);
+        const text = await multimodal(imageBinary, input);
         setMessages((prevMessages) => [
           ...prevMessages,
           {
@@ -92,6 +102,9 @@ const ChatWindow = () => {
         ]);
       } catch (error) {
         console.error("multimodal error: ", error);
+      } finally {
+        setInput(""); // Clear the input box
+        setLoading(false);
       }
     };
     reader.readAsBinaryString(file);
@@ -101,45 +114,32 @@ const ChatWindow = () => {
     <div className={`chat-window`}>
       <Header />
       <div className="chat-container" ref={chatContainerRef}>
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`message ${
-              message.sender === "user" ? "user" : "ai"
-            }`}
-          >
-            {message.isImage ? (
-              <img src={message.text} alt="Uploaded" />
-            ) : (
-              <>
-                <p className="message-text">{message.text}</p>
-                <span
-                  className={`time ${
-                    message.sender === "user" ? "user" : "ai"
-                  }`}
-                >
-                  {message.timestamp
-                    ? dayjs(message.timestamp).format("DD.MM.YYYY HH:mm:ss")
-                    : ""}
-                </span>
-              </>
-            )}
-          </div>
-        ))}
+      {messages.map((message, index) => (
+  <div
+    key={index}
+    className={`message ${message.sender === "user" ? "user" : "ai"}`}
+  >
+    {message.isImage ? (
+      <>
+        <img src={message.imageUrl} alt="Uploaded" />
+        {message.text && <p className="message-text">{message.text}</p>}
+      </>
+    ) : (
+      <>
+        <p className="message-text">{message.text}</p>
+        <span
+          className={`time ${message.sender === "user" ? "user" : "ai"}`}
+        >
+          {message.timestamp
+            ? dayjs(message.timestamp).format("DD.MM.YYYY HH:mm:ss")
+            : ""}
+        </span>
+      </>
+    )}
+  </div>
+))}
       </div>
-      <div>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          ref={fileInputRef}
-          style={{ display: "none" }}
-        />
-        <button onClick={() => fileInputRef.current.click()}>
-          Upload Image
-        </button>
-      </div>
-      <InputBox sendMessage={sendMessage} loading={loading} />
+      <InputBox sendMessage={sendMessage} loading={loading} handleImageUpload={handleImageUpload} input={input} setInput={setInput} />
     </div>
   );
 };

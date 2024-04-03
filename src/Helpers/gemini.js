@@ -10,10 +10,12 @@ export async function textOnly(prompt){
   return result.response.text();
 };
 
-export async function multimodal(imageBinary){
+export async function multimodal(imageBinary, prompt){
   // For text-and-image input (multimodal), use the gemini-pro-vision model
   const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-  const prompt = "Explain me this chart";
+  if(!prompt){
+    prompt = "Explain me this image or chart"
+  }
   const mimeType = "image/png";
 
   // Convert image binary to a GoogleGenerativeAI.Part object.
