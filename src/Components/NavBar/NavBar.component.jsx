@@ -19,20 +19,22 @@ const NavBar = () => {
     return (
         <Fragment>
             <div className="navbar flex gap-3 p-4 items-center w-full justify-end">
-                <button onClick={() => { setDarkMode((e) => !e) }}>Toggle Modes</button>
-                <Link to="/"><div className={"nav-item" + (location.pathname === "/" ? " active" : "")}>Home</div></Link>
-                {user &&
-                    <Link to="/Dashboard"><div className={"nav-item" + (location.pathname === "/Dashboard" ? " active" : "")}>Dashboard</div></Link>
-                }
-                { user &&
-                    <Link to="/AI_Assistant"><div className={"nav-item" + (location.pathname === "/AI_Assistant" ? " active" : "")}>AI_Assistant</div></Link>                    
-                }
-                <Link to="/Cryptos"><div className={"nav-item" + (location.pathname.includes("/Cryptos") ? " active" : "")}>Cryptocurrencies</div></Link>
-                {user ?
-                    <Link to="/Profile"><img className="rounded-xl" src={user.photoURL} width={40} /></Link>
-                    :
-                    <Link to="/Auth"><div className={"nav-item" + (location.pathname === "/Auth" ? " active" : "")}>Login/signup</div></Link>
-                }
+
+            <img src="logo2.png" alt="Logo" width="65"/>
+            <button onClick={() => { setDarkMode((e) => !e) }}>Toggle Modes</button>
+            <Link to="/Home"><div className={"nav-item" + (location.pathname === "/" ? " active" : "")}>Home</div></Link>
+            {user &&
+                <Link to="/Dashboard"><div className={"nav-item" + (location.pathname === "/Dashboard" ? " active" : "")}>Dashboard</div></Link>
+            }
+            { user &&
+                <Link to="/AI_Assistant"><div className={"nav-item" + (location.pathname === "/AI_Assistant" ? " active" : "")}>AI_Assistant</div></Link>                    
+            }
+            <Link to="/Cryptos"><div className={"nav-item" + (location.pathname.includes("/Cryptos") ? " active" : "")}>Cryptocurrencies</div></Link>
+            {user ?
+                <Link to="/Profile"><img className="rounded-xl" src={user.photoURL} width={40} /></Link>
+                :
+                <Link to="/Auth"><div className={"nav-item" + (location.pathname === "/Auth" ? " active" : "")}>Login/signup</div></Link>
+            }
 
             </div>
         </Fragment>
