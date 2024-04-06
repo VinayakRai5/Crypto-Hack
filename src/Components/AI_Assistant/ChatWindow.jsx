@@ -11,10 +11,10 @@ const Header = () => {
   return (
     <div className="header bg-grey-900 text-white p-4">
       <h1 id="chat-header" className="flex items-center">
-        <img src="logo1.jpeg" alt="chatbot" width={50} />
-        <b style={{ marginLeft: 5, fontSize: 35 }}>Financial Advisor</b>
+      <img src="chat3.png" alt="chatbot" className="h-12" />
+
+        <b style={{ marginLeft: 12, fontSize: 35 }}>Financial Advisor -</b> <b style={{ marginTop: 4, marginLeft: 8, fontSize: 20 }}>Your Financial and Mental Health Supporter</b>
       </h1>
-      <small>Your Financial and Mental Health Supporter</small>
     </div>
   );
 };
