@@ -15,7 +15,7 @@ const InputBox = ({ sendMessage, loading, handleImageUpload, input, setInput }) 
       <input
         disabled={loading}
         type="text"
-        className="form-control bg-grey-900 text-white px-4 py-2 rounded-md w-full focus:outline-none"
+        className="form-control bg-grey text-white px-4 py-2 rounded-md w-full focus:outline-none"
         placeholder="Type a message..."
         value={loading ? "Loading..." : input}
         onChange={(e) => setInput(e.target.value)}
@@ -28,8 +28,8 @@ const InputBox = ({ sendMessage, loading, handleImageUpload, input, setInput }) 
         style={{ display: "none" }}
         id="file-input"
       />
-      <button className="bg-black text-white px-4 py-2 rounded-md" onClick={() => document.getElementById("file-input").click()}>
-        Upload Image
+      <button style={{marginTop: 20}}className="bg-white text-black align-center px-6 py-2 rounded-md" onClick={() => document.getElementById("file-input").click()}>
+      <b style={{ marginLeft: 2, fontSize: 20 }}>Upload Image</b> 
       </button>
     </div>
   );
