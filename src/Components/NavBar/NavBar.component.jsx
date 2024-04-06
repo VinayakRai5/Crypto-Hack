@@ -22,7 +22,7 @@ const NavBar = () => {
 
             <img src="logo2.png" alt="Logo" width="65"/>
             <button onClick={() => { setDarkMode((e) => !e) }}>Toggle Modes</button>
-            <Link to="/Home"><div className={"nav-item" + (location.pathname === "/" ? " active" : "")}>Home</div></Link>
+            <Link to="/"><div className={"nav-item" + (location.pathname === "/" ? " active" : "")}>Home</div></Link>
             {user &&
                 <Link to="/Dashboard"><div className={"nav-item" + (location.pathname === "/Dashboard" ? " active" : "")}>Dashboard</div></Link>
             }
