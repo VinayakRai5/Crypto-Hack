@@ -51,7 +51,7 @@ const router = createBrowserRouter([
                 element: <AI_AssistantRoute />,
             },
             {
-                path: "Home",
+                path: "/",
                 element: <HomeRoute />,
             }
         ],

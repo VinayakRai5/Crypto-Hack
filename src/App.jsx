@@ -4,6 +4,7 @@ import NavBar from './Components/NavBar/NavBar.component'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from './Contexts/user.context'
 import { FetchDBData } from './Helpers/API_Calls'
+import HomePage from './Components/Home/Home'
 
 function App() {
   const { user, db_user, setDBUser, refresh, setUserCreated, userCreated } = useContext(UserContext);
